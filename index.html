@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Assignment 2 - Website Building</title>
+        <link href=https://fonts.googleapis.com/icon?family=Material+Icons rel="stylesheet"></linkhref>
+        <style>
+            body {
+                background-color: #101112;
+                box-sizing: border-box;
+                font-family: sans-serif;
+                color: #fff;
+            }
+            #login-container {
+                width: 460px;
+                margin: 300px auto;
+                border: 1px solid #fff;
+                padding: 76px;
+            }
+            p {
+                text-align: center;
+            }
+            form label,
+            form input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            form input {
+                padding: 8px;
+            }
+
+            form label {
+                font-weight: bold;
+            }
+
+            form div {
+                margin: 16px 0px;
+            }
+            .green {
+                border: 1px solid green;
+            }
+            .red {
+                border: 1px solid red;
+            }
+            .holder {
+                position: relative;
+            }
+            .material-icons {
+                position: absolute;
+                right: 10px;
+                top: 22px;
+            }
+            .block {
+                display: block;
+            }
+            .hidden {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="login-container">
+            <form>
+                <div class="holder">
+                    <label for="username">Username:</label>
+                    <input id="username" type="text" name="username">
+                    <span id="yes1" class="material-icons hidden" style="color: green;">
+                        done
+                    </span>
+                    <span id="wrong1" class="material-icons hidden" style="color: red;">
+                        close
+                    </span>
+                </div>
+                <div class="holder">
+                    <label for="password">Password:</label>
+                    <input id="password" type="password" name="password">
+                    <span id="yes" class="material-icons hidden" style="color: green;">
+                        done
+                    </span>
+                    <span id="wrong" class="material-icons hidden" style="color: red;">
+                        close
+                    </span>
+                </div>
+                <input id="loginSubmit" type="submit" value="Login">
+            </form>
+            <p id="userError"></p>
+            <p id="passError"></p>
+            <p id="successful"></p>
+        </div>
+        <script src="jquery-3.6.0.slim.min.js"></script>
+        <script>
+            let newUser = "new_user";
+            let password = "123456789";
+            $("#loginSubmit").click(function(e) {
+                e.preventDefault();
+                let inputUserVal = $("#username").val();
+                let inputPassVal = $("#password").val();
+                console.log(inputUserVal);
+                console.log(inputPassVal);
+                if (inputUserVal == newUser) {
+                    $("#username").removeClass("red");
+                    $("#username").addClass("green");
+                    $("#yes1").removeClass("hidden");
+                    $("#yes1").addClass("block");
+                    $("#wrong1").removeClass("block");
+                    $("#wrong1").addClass("hidden");
+                    $("#userError").text(""); 
+                } else if (inputUserVal === "") {
+                    $("#username").removeClass("green"); 
+                    $("#username").addClass("red"); 
+                    $("#yes1").addClass("hidden");
+                    $("#yes1").removeClass("block");
+                    $("#wrong1").removeClass("hidden");
+                    $("#wrong1").addClass("block");
+                    $("#userError").text("*please, enter username"); 
+                } 
+                else {
+                    $("#username").removeClass("green")
+                    $("#username").addClass("red")
+                    $("#yes1").addClass("hidden");
+                    $("#yes1").removeClass("block");
+                    $("#wrong1").addClass("block");
+                    $("#wrong1").removeClass("hidden");
+                    $("#userError").text("*please, enter valid username"); 
+                }
+                if (inputPassVal === password) {
+                    $("#password").removeClass("red");
+                    $("#password").addClass("green");
+                    $("#wrong").removeClass("block");
+                    $("#wrong").addClass("hidden");
+                    $("#yes").removeClass("hidden");
+                    $("#yes").addClass("block");
+                    $("#passError").text(""); 
+                } else if (inputPassVal === "") {
+                    $("#password").removeClass("green"); 
+                    $("#password").addClass("red"); 
+                    $("#yes").addClass("hidden");
+                    $("#yes").removeClass("block");
+                    $("#wrong").removeClass("hidden");
+                    $("#wrong").addClass("block");
+                    $("#passError").text("*please, enter password"); 
+                } 
+                else {
+                    $("#password").removeClass("green");
+                    $("#password").addClass("red");
+                    $("#yes").addClass("hidden");
+                    $("#yes").removeClass("block");
+                    $("#wrong").removeClass("hidden");
+                    $("#wrong").addClass("block");
+                    $("#passError").text("*please, enter valid password"); 
+                }
+                if (inputUserVal === newUser && inputPassVal === password) {
+                    $("#successful").text("Successful login!");
+                } else {
+                    $("#successful").text("");      
+                }
+            })
+        </script>
+    </body>
+</html>
